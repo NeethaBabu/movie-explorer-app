@@ -63,7 +63,6 @@ class _HomePageState extends State<HomePage> {
               BlocBuilder<MovieBloc, MovieState>(
                 builder: (context, state) {
                   if (state is MovieLoaded) {
-                    // OMDb gives 10 per page → show first 5 pages max
                     final pages = List.generate(5, (index) => index + 1);
 
                     return Padding(
