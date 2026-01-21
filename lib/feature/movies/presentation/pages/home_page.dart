@@ -62,28 +62,45 @@ class _HomePageState extends State<HomePage> {
 
               BlocBuilder<MovieBloc, MovieState>(
                 builder: (context, state) {
-                  if (state is MovieLoaded && state.hasMore) {
-                    if (state.isLoadingMore) {
-                      return const Padding(
-                        padding: EdgeInsets.all(16),
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    }
+                  if (state is MovieLoaded) {
+                    // OMDb gives 10 per page → show first 5 pages max
+                    final pages = List.generate(5, (index) => index + 1);
 
                     return Padding(
-                      padding: const EdgeInsets.all(16),
-                      child: Center(
-                        child: ElevatedButton(
-                          onPressed: () {
-                            page++;
-                            context.read<MovieBloc>().add(
-                              FetchMovies(currentQuery, page, loadMore: true),
-                            );
-                          },
-                          child: const Text("Load More"),
-                        ),
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: pages.map((p) {
+                          final bool isActive = p == page;
+
+                          return GestureDetector(
+                            onTap: () {
+                              setState(() => page = p);
+                              context.read<MovieBloc>().add(
+                                FetchMovies(currentQuery, page),
+                              );
+                            },
+                            child: Container(
+                              width: 36,
+                              height: 36,
+                              margin: const EdgeInsets.symmetric(horizontal: 6),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                color: isActive ? Colors.red : Colors.transparent,
+                                borderRadius: BorderRadius.circular(18),
+                                border: Border.all(color: Colors.white30),
+                              ),
+                              child: Text(
+                                "$p",
+                                style: TextStyle(
+                                  color: isActive ? Colors.white : Colors.white70,
+                                  fontWeight:
+                                  isActive ? FontWeight.bold : FontWeight.normal,
+                                ),
+                              ),
+                            ),
+                          );
+                        }).toList(),
                       ),
                     );
                   }
