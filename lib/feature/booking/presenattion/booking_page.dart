@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:barcode_widget/barcode_widget.dart';
 
 class BookingPage extends StatelessWidget {
+  const BookingPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final args =
@@ -23,155 +25,158 @@ class BookingPage extends StatelessWidget {
           onPressed: () => Navigator.pop(context),
         ),
       ),
-      body: Column(
-        children: [
-          SizedBox(height: 16),
-
-          // Success icon
-          Image.asset("assets/images/booked_icon.png"),
-
-          SizedBox(height: 12),
-
-          Text(
-            "Booking Successful",
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-
-          SizedBox(height: 4),
-
-          Text("For ${details["Title"]}", style: TextStyle(color: Colors.grey)),
-
-          SizedBox(height: 28),
-
-          // Ticket card
-          Center(
-            child: Container(
-              width: 260,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(26),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black12,
-                    blurRadius: 18,
-                    offset: Offset(0, 8),
-                  ),
-                ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            SizedBox(height: 16),
+        
+        
+            Image.asset("assets/images/booked_icon.png", height: 100),
+        
+            SizedBox(height: 12),
+        
+            Text(
+              "Booking Successful",
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
               ),
-              child: Column(
-                children: [
-                  // Poster
-                  ClipRRect(
-                    borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(26),
+            ),
+        
+            SizedBox(height: 4),
+        
+            Text("For ${details["Title"]}", style: TextStyle(color: Colors.grey)),
+        
+            SizedBox(height: 28),
+        
+        
+            Center(
+              child: Container(
+                width: 240,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(26),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black12,
+                      blurRadius: 18,
+                      offset: Offset(0, 8),
                     ),
-                    child: Stack(
-                      children: [
-                        Image.network(
-                          details["Poster"],
-                          height: 280,
-                          width: double.infinity,
-                          fit: BoxFit.cover,
-                        ),
-                        Container(
-                          height: 280,
-                          decoration: BoxDecoration(
-                            gradient: LinearGradient(
-                              begin: Alignment.topCenter,
-                              end: Alignment.bottomCenter,
-                              colors: [
-                                Colors.transparent,
-                                Colors.black.withOpacity(0.85),
+                  ],
+                ),
+                child: Column(
+                  children: [
+        
+                    ClipRRect(
+                      borderRadius: BorderRadius.vertical(
+                        top: Radius.circular(26),
+                      ),
+                      child: Stack(
+                        children: [
+                          Image.network(
+                            details["Poster"],
+                            height: 280,
+                            width: double.infinity,
+                            fit: BoxFit.cover,
+                          ),
+                          Container(
+                            height: 280,
+                            decoration: BoxDecoration(
+                              gradient: LinearGradient(
+                                begin: Alignment.topCenter,
+                                end: Alignment.bottomCenter,
+                                colors: [
+                                  Colors.transparent,
+                                  Colors.black.withOpacity(0.85),
+                                ],
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            bottom: 20,
+                            left: 0,
+                            right: 0,
+                            child: Column(
+                              children: [
+                                Text(
+                                  "Doctor Strange",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                SizedBox(height: 2),
+                                Text(
+                                  "in the Multiverse of Madness",
+                                  style: TextStyle(
+                                    color: Colors.white70,
+                                    fontSize: 12,
+                                  ),
+                                ),
                               ],
                             ),
                           ),
-                        ),
-                        Positioned(
-                          bottom: 20,
-                          left: 0,
-                          right: 0,
-                          child: Column(
-                            children: [
-                              Text(
-                                "Doctor Strange",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              SizedBox(height: 2),
-                              Text(
-                                "in the Multiverse of Madness",
-                                style: TextStyle(
-                                  color: Colors.white70,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-
-                  // Ticket info
-                  Container(
-                    padding: EdgeInsets.symmetric(vertical: 16),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.vertical(
-                        bottom: Radius.circular(26),
+                        ],
                       ),
                     ),
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              _info("Date", date),
-                              _info("Time", time),
-                            ],
-                          ),
+        
+        
+                    Container(
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.vertical(
+                          bottom: Radius.circular(26),
                         ),
-
-                        SizedBox(height: 12),
-
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 20),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              _info("Row", row),
-                              _info("Seats", seats),
-                            ],
+                      ),
+                      child: Column(
+                        children: [
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _info("Date", date),
+                                _info("Time", time),
+                              ],
+                            ),
                           ),
-                        ),
-
-                        SizedBox(height: 16),
-
-                        Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 16),
-                          child: BarcodeWidget(
-                            barcode: Barcode.code128(),
-                            data: details["imdbID"],
-                            height: 70,
-                            drawText: false,
+        
+                          SizedBox(height: 12),
+        
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                _info("Row", row),
+                                _info("Seats", seats),
+                              ],
+                            ),
                           ),
-                        ),
-                      ],
+        
+                          SizedBox(height: 16),
+        
+                          Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 16),
+                            child: BarcodeWidget(
+                              barcode: Barcode.code128(),
+                              data: details["imdbID"],
+                              height: 70,
+                              drawText: false,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+            SizedBox(height: 40,)
+          ],
+        ),
       ),
     );
   }

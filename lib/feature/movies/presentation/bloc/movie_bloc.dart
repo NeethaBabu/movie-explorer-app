@@ -11,31 +11,9 @@ class MovieBloc extends Bloc<MovieEvent, MovieState> {
   bool hasMore = true;
 
   MovieBloc(this.repository) : super(MovieInitial()) {
-    // on<FetchMovies>((event, emit) async {
-    //   try {
-    //     if (!event.loadMore) {
-    //       emit(MovieLoading());
-    //       allMovies.clear();
-    //       hasMore = true;
-    //     }
-    //
-    //     if (!hasMore) return;
-    //
-    //     final movies = await repository.getMovies(event.query, event.page);
-    //
-    //     if (movies.length < 10) {
-    //       hasMore = false;
-    //     }
-    //
-    //     allMovies.addAll(movies);
-    //     emit(MovieLoaded(List.from(allMovies), hasMore: hasMore));
-    //   } catch (e) {
-    //     emit(MovieError(e.toString()));
-    //   }
-    // });
     on<FetchMovies>((event, emit) async {
       try {
-        // first load or new search
+
         if (!event.loadMore) {
           emit(MovieLoading());
           page = event.page;

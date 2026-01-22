@@ -5,6 +5,8 @@ import '../bloc/movie_event.dart';
 import '../bloc/movie_state.dart';
 
 class MovieDetailsPage extends StatefulWidget {
+  const MovieDetailsPage({super.key});
+
   @override
   State<MovieDetailsPage> createState() => _MovieDetailsPageState();
 }
@@ -31,7 +33,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
       body: BlocBuilder<MovieBloc, MovieState>(
         builder: (context, state) {
           if (state is MovieLoading) {
-            return Center(child: CircularProgressIndicator());
+            return Center(child: CircularProgressIndicator(color: Colors.red));
           }
 
           if (state is MovieDetailsLoaded) {
@@ -89,7 +91,7 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
           top: 50,
           left: 16,
           child: IconButton(
-            icon: Icon(Icons.arrow_back, color: Colors.white),
+            icon: Icon(Icons.arrow_back_ios, color: Colors.black),
             onPressed: () => Navigator.pop(context),
           ),
         ),
@@ -256,14 +258,13 @@ class _MovieDetailsPageState extends State<MovieDetailsPage> {
               "seats": "9, 10",
             };
 
-            Navigator.pushNamed(
-              context,
-              "/booking",
-              arguments: bookingData,
-            );
+            Navigator.pushNamed(context, "/booking", arguments: bookingData);
           },
 
-          child: Text("BOOK NOW", style: TextStyle(fontSize: 18)),
+          child: Text(
+            "BOOK NOW",
+            style: TextStyle(fontSize: 18, color: Colors.grey),
+          ),
         ),
       ),
     );

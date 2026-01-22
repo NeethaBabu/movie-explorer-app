@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../core/utils/app_route.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -19,8 +20,8 @@ class _SplashPageState extends State<SplashPage>
       duration: Duration(seconds: 2),
     )..forward();
 
-    Future.delayed(Duration(seconds: 2), () {
-      Navigator.pushReplacementNamed(context, "/home");
+    Future.delayed(const Duration(seconds: 2), () {
+      Navigator.pushReplacementNamed(context, AppRoute.walkthrough);
     });
   }
 
